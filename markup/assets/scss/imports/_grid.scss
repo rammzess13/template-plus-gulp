@@ -1,0 +1,196 @@
+// Bootstrap Grid only
+//
+// Includes relevant variables and mixins for the regular (non-flexbox) grid
+// system, as well as the generated predefined classes (e.g., `.col-4-small`).
+
+
+//
+// Variables
+//
+
+$enable-flex:               true !default;
+$enable-rounded:            true !default;
+$enable-shadows:            true !default;
+$enable-gradients:          true !default;
+$enable-transitions:        true !default;
+$enable-hover-media-query:  true !default;
+
+
+$developer-mode:            true !default;
+
+@if  $developer-mode {
+  [class*="col-"] {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    background-color: rgba(86,61,124,.15);
+    border: 1px solid rgba(86,61,124,.2);
+}
+}
+
+// Grid system
+//
+// Define your custom responsive grid.
+$grid-breakpoints: (
+  xsmall: 0,
+  small: 480px,
+  middle: 720px,
+  large: 960px,
+  xlarge: 1140px
+) !default;
+
+// Number of columns in the grid.
+$grid-columns:               12 !default;
+
+// Padding between columns. Gets divided in half for the left and right.
+$grid-gutter-width:          30px !default;
+
+
+// Container sizes
+//
+// Define the maximum width of `.container` for different screen sizes.
+
+$container-max-widths: (
+  small: 480px,
+  middle: 720px,
+  large: 960px,
+  xlarge: 1140px
+) !default;
+
+
+//
+// Grid mixins
+//
+
+@import "mixins/clearfix";
+@import "mixins/breakpoints";
+@import "mixins/grid-framework";
+@import "mixins/grid";
+
+// @import "grid";
+
+
+.container {
+  @include make-container();
+  @include make-container-collapse();
+
+  // For each breakpoint, define the maximum width of the container in a media query
+  @each $breakpoint, $container-max-width in $container-max-widths {
+    @include media-breakpoint-up($breakpoint) {
+      max-width: $container-max-width;
+    }
+  }
+}
+
+
+// Fluid container
+//
+// Utilizes the mixin meant for fixed width containers, but without any defined
+// width for fluid, full width layouts.
+
+.container-fluid {
+  @include make-container();
+  @include make-container-collapse();
+}
+
+
+// Row
+//
+// Rows contain and clear the floats of your columns.
+
+.row {
+  @include make-row();
+  @include make-row-collapse();
+}
+
+
+// Columns
+//
+// Common styles for small and large grid columns
+
+@include make-grid-columns();
+
+
+
+// Flex variation
+//
+// Custom styles for additional flex alignment options.
+
+@if $enable-flex {
+
+  // Flex column reordering
+
+  .col-xsmall-first { order: -1; }
+  .col-xsmall-last { order: 1; }
+
+  @include media-breakpoint-up(small) {
+    .col-small-first { order: -1; }
+    .col-small-last { order: 1; }
+  }
+  @include media-breakpoint-up(middle) {
+    .col-middle-first { order: -1; }
+    .col-middle-last { order: 1; }
+  }
+  @include media-breakpoint-up(large) {
+    .col-large-first { order: -1; }
+    .col-large-last { order: 1; }
+  }
+  @include media-breakpoint-up(xlarge) {
+    .col-xlarge-first { order: -1; }
+    .col-xlarge-last { order: 1; }
+  }
+
+  // Alignment for every column in row
+
+  .row-xsmall-top    { align-items: flex-start; }
+  .row-xsmall-center { align-items: center; }
+  .row-xsmall-bottom { align-items: flex-end; }
+
+  @include media-breakpoint-up(small) {
+    .row-small-top    { align-items: flex-start; }
+    .row-small-center { align-items: center; }
+    .row-small-bottom { align-items: flex-end; }
+  }
+  @include media-breakpoint-up(middle) {
+    .row-middle-top    { align-items: flex-start; }
+    .row-middle-center { align-items: center; }
+    .row-middle-bottom { align-items: flex-end; }
+  }
+  @include media-breakpoint-up(large) {
+    .row-large-top    { align-items: flex-start; }
+    .row-large-center { align-items: center; }
+    .row-large-bottom { align-items: flex-end; }
+  }
+  @include media-breakpoint-up(xlarge) {
+    .row-xlarge-top    { align-items: flex-start; }
+    .row-xlarge-center { align-items: center; }
+    .row-xlarge-bottom { align-items: flex-end; }
+  }
+
+  // Alignment per column
+
+  .col-xsmall-top    { align-self: flex-start; }
+  .col-xsmall-center { align-self: center; }
+  .col-xsmall-bottom { align-self: flex-end; }
+
+  @include media-breakpoint-up(small) {
+    .col-small-top    { align-self: flex-start; }
+    .col-small-center { align-self: center; }
+    .col-small-bottom { align-self: flex-end; }
+  }
+  @include media-breakpoint-up(middle) {
+    .col-middle-top    { align-self: flex-start; }
+    .col-middle-center { align-self: center; }
+    .col-middle-bottom { align-self: flex-end; }
+  }
+  @include media-breakpoint-up(large) {
+    .col-large-top    { align-self: flex-start; }
+    .col-large-center { align-self: center; }
+    .col-large-bottom { align-self: flex-end; }
+  }
+  @include media-breakpoint-up(xlarge) {
+    .col-xlarge-top    { align-self: flex-start; }
+    .col-xlarge-center { align-self: center; }
+    .col-xlarge-bottom { align-self: flex-end; }
+  }
+
+}
