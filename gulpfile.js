@@ -100,7 +100,7 @@ gulp.task('watch', function () {
 // });
 
 
-gulp.task('dev', ['watch', 'browser-sync']);
+gulp.task('dev', ['html','js', 'sass', 'watch', 'browser-sync']);
 
 
 
